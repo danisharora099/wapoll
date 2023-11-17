@@ -1,8 +1,8 @@
 export const questions = [
   {
     id: "1",
-    question: "What is the capital of France?",
-    answers: ["Paris", "London", "New York", "Madrid"],
+    question: "What is your favourite part about Istanbul?",
+    answers: ["Baklava", "The Taxis ;)", "Conferences", "The Kebabs"],
     correctAnswer: 0,
   },
 ];

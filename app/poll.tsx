@@ -31,6 +31,7 @@ const Poll: React.FC<IProps> = ({ waku }) => {
     });
   };
 
+  // Process a received vote into the vote counts state
   const processReceivedVote = (pollMessage: IPollMessage) => {
     pollMessage.answers.forEach((answer) => {
       const answerIndex = question.answers.indexOf(answer);
