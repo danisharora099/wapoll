@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { sendVote, receiveVotes, retrieveExistingVotes } from "./waku";
-import { questions } from "./questions";
+import { sendVote, receiveVotes, retrieveExistingVotes } from "./lib/waku";
+import { questions } from "./config/questions";
 import { LightNode } from "@waku/sdk";
-import { IPollMessage } from "./type";
+import { IPollMessage } from "./types";
 
 interface IProps {
   waku: LightNode; // Passing the Waku instance as a prop

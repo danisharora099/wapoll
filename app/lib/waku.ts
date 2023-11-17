@@ -8,12 +8,18 @@ import {
   createLightNode,
   waitForRemotePeer,
 } from "@waku/sdk";
-import { IPollMessage, PPollMessage } from "./type";
+import { IPollMessage, PPollMessage } from "../types";
 
 const contentTopic = "/waquiz/1";
 
 const encoder = createEncoder({ contentTopic });
 const decoder = createDecoder(contentTopic);
+
+// TODO: createNode
+// TODO: subscribeToIncomingVotes
+// TODO: retrieveExistingVotes
+// TODO: sendVote
+
 
 export const createNode = async () => {
   const waku = await createLightNode({ defaultBootstrap: true });

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import type { LightNode } from "@waku/sdk";
 import Poll from "./poll";
-import { createNode } from "./waku";
+import { createNode } from "./lib/waku";
 
 const App: React.FC = () => {
   const [wakuNode, setWakuNode] = useState<LightNode | null>(null);
