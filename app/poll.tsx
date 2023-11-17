@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { sendVote, receiveVotes } from './waku';
+import { sendVote, receiveVotes, retrieveExistingVotes } from './waku';
 import { questions } from './questions';
 import { LightNode } from '@waku/sdk';
 import { IPollMessage } from './type';
@@ -29,13 +29,7 @@ const Poll: React.FC<IProps> = ({ waku }) => {
         });
     };
 
-    // Effect to set up receiving votes
-    useEffect(() => {
-        // Asynchronous function to subscribe to vote updates
-        const subscribeToVotes = async () => {
-            console.log('Poll: Listening for votes');
-            await receiveVotes(waku, (pollMessage: IPollMessage) => {
-                // Process each received vote
+    const processReceivedVote = (pollMessage: IPollMessage) => {
                 pollMessage.answers.forEach(answer => {
                     const answerIndex = question.answers.indexOf(answer);
                     // Update the vote counts state
@@ -47,7 +41,13 @@ const Poll: React.FC<IProps> = ({ waku }) => {
                         });
                     }
                 });
-            });
+    }
+
+    useEffect(() => {        
+        const subscribeToVotes = async () => {
+            console.log('Poll: Listening for votes');
+            await retrieveExistingVotes(waku, processReceivedVote);
+            await receiveVotes(waku, processReceivedVote);
         };
 
         subscribeToVotes();

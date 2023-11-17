@@ -39,6 +39,20 @@ const serialisedMessage = PPollMessage.encode(protoMessage).finish();
 
 // Send the message using Light Push
 await waku.lightPush.send(encoder, {
-    payload: serialisedMessage,
+    payload: serialisedMessage, 
 });
+}
+
+export const retrieveExistingVotes = async (waku: LightNode, callback: (pollMessage: IPollMessage) => void) => {
+    const _callback = (wakuMessage: DecodedMessage): void => {
+        if (!wakuMessage.payload) return;
+        const pollMessageObj = PPollMessage.decode(wakuMessage.payload);  
+        const pollMessage = pollMessageObj.toJSON() as IPollMessage;
+        callback(pollMessage);
+    };
+
+// Query the Store peer
+await waku.store.queryWithOrderedCallback(
+    [decoder],
+    _callback);
 }
