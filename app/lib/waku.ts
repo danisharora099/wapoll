@@ -10,7 +10,7 @@ import {
 } from "@waku/sdk";
 import { IPollMessage, PPollMessage } from "../types";
 
-const contentTopic = "/wapoll/1";
+const contentTopic = "/wapoll/0";
 
 const encoder = createEncoder({ contentTopic });
 const decoder = createDecoder(contentTopic);
